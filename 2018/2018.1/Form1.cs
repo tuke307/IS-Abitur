@@ -20,23 +20,27 @@ namespace Vorabi._2018
 
         private void dg_termine_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
+
         private List<Termin> termine = new List<Termin>();
+
         private void button1_Click(object sender, EventArgs e)
         {
             termine = new List<Termin>();
+            string[] lines;
+            string datum;
+            string mitarbeiterStatus;
 
-            string[] lines = File.ReadAllLines(EmbeddedHelper.GetResourcePath("Termine.txt"));
-            
-            foreach (var line in lines)
+            lines = File.ReadAllLines(@"C:\Users\Tony\Source\Repos\tuke307\IS-Abitur\2018\2018.1\Termine.txt");
+
+            foreach (string line in lines)
             {
-                int first = line.IndexOf(" ");
+                int leerzeichenPos = line.IndexOf(" ");
 
-                string datum = line.Substring(0, first);
-                string mitarbeiter = line.Substring(first);
+                datum = line.Substring(0, leerzeichenPos);
+                mitarbeiterStatus = line.Substring(leerzeichenPos);
 
-                Termin termin = new Termin(Convert.ToDateTime(datum), mitarbeiter);
+                Termin termin = new Termin(Convert.ToDateTime(datum), mitarbeiterStatus);
                 termine.Add(termin);
             }
 
@@ -49,21 +53,36 @@ namespace Vorabi._2018
 
             DateTime datum = Convert.ToDateTime(text);
 
-            Termin termin = termine.Where(t => t.Datum == datum).First();
-            termine.Remove(termin);
+            //Termin termin = termine.Where(t => t.Datum == datum).First();
+            //termine.Remove(termin);
 
-            // frei
-            if (termin.Mitarbeiter == "frei")
-            {
-                MessageBox.Show("frei, wird jetzt gebucht");
-                termin = new Termin(datum, "T");
-                termine.Add(termin);
-            }
-            //frei
-            else if(termin.Mitarbeiter == "T")
-            {
-                MessageBox.Show("nicht frei");
-            }
+            //// frei
+            //if (termin.Mitarbeiter == "frei")
+            //{
+            //    MessageBox.Show("frei, wird jetzt gebucht");
+            //    termin = new Termin(datum, "T");
+            //    termine.Add(termin);
+            //}
+            ////frei
+            //else if (termin.Mitarbeiter == "T")
+            //{
+            //    MessageBox.Show("nicht frei");
+            //}
+        }
+
+        public void irgendwas()
+        {
+            // deklaration
+            Termin montag;
+
+            // instanzierung
+            montag = new Termin(DateTime.Now, "frei");
+
+            // getter
+            DateTime montagDatum = montag.getDate();
+
+            // setter
+            montag.setDate(DateTime.Now);
         }
     }
 }
