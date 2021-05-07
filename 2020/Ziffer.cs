@@ -10,28 +10,29 @@ namespace ISVORABI
     {
         private bool sa;
         private bool sb;
-        private bool sc; 
-        private bool sd; 
+        private bool sc;
+        private bool sd;
         private bool se;
         private bool sf;
-        private bool sg; 
-        private byte wert; 
+        private bool sg;
+        private byte wert;
 
         public void setWert(int stellenindex, int zahl)
         {
             string komplett = zahl.ToString();
-            
-            if(komplett.Length == 1)
+
+            if (komplett.Length == 1)
             {
                 setWert(Convert.ToByte(komplett));
                 return;
             }
 
-            string value = komplett.Substring(stellenindex-1, 1);
+            string value = komplett.Substring(stellenindex - 1, 1);
 
             wert = Convert.ToByte(value);
             setWert(Convert.ToByte(wert));
         }
+
         public void setWert(byte ziffer)
         {
             wert = ziffer;
@@ -47,6 +48,7 @@ namespace ISVORABI
                     sf = true;
                     sg = true;
                     break;
+
                 case 1:
                     sa = false;
                     sb = true;
@@ -56,6 +58,7 @@ namespace ISVORABI
                     sf = false;
                     sg = false;
                     break;
+
                 case 2:
                     sa = true;
                     sb = true;
@@ -65,6 +68,7 @@ namespace ISVORABI
                     sf = false;
                     sg = true;
                     break;
+
                 case 3:
                     sa = true;
                     sb = true;
@@ -74,6 +78,7 @@ namespace ISVORABI
                     sf = false;
                     sg = true;
                     break;
+
                 case 4:
                     sa = false;
                     sb = false;
@@ -83,6 +88,7 @@ namespace ISVORABI
                     sf = true;
                     sg = true;
                     break;
+
                 case 5:
                     sa = true;
                     sb = false;
@@ -92,6 +98,7 @@ namespace ISVORABI
                     sf = true;
                     sg = true;
                     break;
+
                 case 6:
                     sa = true;
                     sb = false;
@@ -101,6 +108,7 @@ namespace ISVORABI
                     sf = true;
                     sg = true;
                     break;
+
                 case 7:
                     sa = true;
                     sb = true;
@@ -110,6 +118,7 @@ namespace ISVORABI
                     sf = false;
                     sg = false;
                     break;
+
                 case 8:
                     sa = true;
                     sb = true;
@@ -119,6 +128,7 @@ namespace ISVORABI
                     sf = true;
                     sg = true;
                     break;
+
                 case 9:
                     sa = true;
                     sb = true;
@@ -137,18 +147,25 @@ namespace ISVORABI
             {
                 case 'a':
                     return sa;
+
                 case 'b':
                     return sb;
+
                 case 'c':
                     return sc;
+
                 case 'd':
                     return sd;
+
                 case 'e':
                     return se;
+
                 case 'f':
                     return sf;
+
                 case 'g':
                     return sg;
+
                 default:
                     return false;
             }

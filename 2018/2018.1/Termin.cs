@@ -8,23 +8,15 @@ namespace Vorabi._2018
 {
     public class Termin
     {
-        private DateTime Datum;
-        public string Mitarbeiter;
+        public string Datum { get; set; }
+        public string Zeit { get; set; }
+        public string Mitarbeiter { get; set; }
 
-        public Termin(DateTime datum, string mitarbeiter)
+        public Termin(string datum, string zeit, string mitarbeiter)
         {
             Datum = datum;
+            Zeit = zeit;
             Mitarbeiter = mitarbeiter;
-        }
-
-        public void setDate(DateTime datum)
-        {
-            Datum = datum;
-        }
-
-        public DateTime getDate()
-        {
-            return Datum;
         }
     }
 }

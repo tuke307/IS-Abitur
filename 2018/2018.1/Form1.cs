@@ -29,18 +29,20 @@ namespace Vorabi._2018
             termine = new List<Termin>();
             string[] lines;
             string datum;
+            string zeit;
             string mitarbeiterStatus;
 
             lines = File.ReadAllLines(@"C:\Users\Tony\Source\Repos\tuke307\IS-Abitur\2018\2018.1\Termine.txt");
 
             foreach (string line in lines)
             {
-                int leerzeichenPos = line.IndexOf(" ");
+                string[] subs = line.Split(' ');
 
-                datum = line.Substring(0, leerzeichenPos);
-                mitarbeiterStatus = line.Substring(leerzeichenPos);
+                datum = subs[0];
+                zeit = subs[1];
+                mitarbeiterStatus = subs[2];
 
-                Termin termin = new Termin(Convert.ToDateTime(datum), mitarbeiterStatus);
+                Termin termin = new Termin(datum, zeit, mitarbeiterStatus);
                 termine.Add(termin);
             }
 
@@ -49,25 +51,54 @@ namespace Vorabi._2018
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string text = txtb_terminanfrage.Text;
+            Termin termin;
+            string line = txtb_terminanfrage.Text;
+            string datum;
+            string zeit;
 
-            DateTime datum = Convert.ToDateTime(text);
+            int datumEndePos = line.IndexOf(",");
 
-            //Termin termin = termine.Where(t => t.Datum == datum).First();
-            //termine.Remove(termin);
+            datum = line.Substring(0, datumEndePos);
+            zeit = line.Substring(datumEndePos + 1);
 
-            //// frei
-            //if (termin.Mitarbeiter == "frei")
-            //{
-            //    MessageBox.Show("frei, wird jetzt gebucht");
-            //    termin = new Termin(datum, "T");
-            //    termine.Add(termin);
-            //}
-            ////frei
-            //else if (termin.Mitarbeiter == "T")
-            //{
-            //    MessageBox.Show("nicht frei");
-            //}
+            try
+            {
+                termin = termine.Where(t => t.Datum == datum && t.Zeit == zeit).First();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fehler bei Termineingabe");
+                return;
+            }
+
+            // frei
+            if (termin.Mitarbeiter == "frei")
+            {
+                MessageBox.Show("Der Termin wird bestätigt");
+                termine.Where(t => t.Datum == datum && t.Zeit == zeit).First().Mitarbeiter = "T";
+                refreshdatasrouce();
+                return;
+            }
+
+            // alternativer termin
+            if (termin.Mitarbeiter == "T")
+            {
+                MessageBox.Show("Es wurde ein alternativer Termin gefunden");
+                termine.Where(t => t.Datum == datum && t.Zeit == zeit).First().Mitarbeiter = "R"; refreshdatasrouce();
+                return;
+            }
+
+            // kein termin verfügbar
+            if (termin.Mitarbeiter == "R")
+            {
+                MessageBox.Show("Es ist kein Termin verfügbar. Der Kunde muss seine Anfrage später noch einmal wiederholen");
+            }
+        }
+
+        private void refreshdatasrouce()
+        {
+            dg_termine.DataSource = termine;
+            dg_termine.Refresh();
         }
 
         public void irgendwas()
@@ -76,13 +107,13 @@ namespace Vorabi._2018
             Termin montag;
 
             // instanzierung
-            montag = new Termin(DateTime.Now, "frei");
+            //montag = new Termin(DateTime.Now, "frei");
 
-            // getter
-            DateTime montagDatum = montag.getDate();
+            //// getter
+            //DateTime montagDatum = montag.getDate();
 
-            // setter
-            montag.setDate(DateTime.Now);
+            //// setter
+            //montag.setDate(DateTime.Now);
         }
     }
 }
