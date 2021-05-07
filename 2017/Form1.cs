@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2017;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,61 +14,43 @@ namespace Vorabi._2018
 {
     public partial class Form1 : Form
     {
+        private List<string> kaeufe = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void dg_termine_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btn_kaufen_Click(object sender, EventArgs e)
         {
-        }
+            T_Speicher_Eintrittskarte karte = new T_Speicher_Eintrittskarte();
+            DateTime kaufdatum = DateTime.Now;
+            double betrag = 0;
+            DateTime gueltig_bis = DateTime.Now;
 
-        //private List<Termin> termine = new List<Termin>();
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    termine = new List<Termin>();
+            if (rb_jahreskarte.Checked)
+            {
+                gueltig_bis = DateTime.Now.AddYears(1);
+            }
+            //else if (rb_tageskarte.Checked)
+            //{
+            //    gueltig_bis = DateTime.Now;
+            //}
 
-        //    string[] lines = File.ReadAllLines(@"C:\Users\Tony\Downloads\Termine.txt");
+            if (rb_vollerbetrag.Checked)
+            {
+                betrag = 50;
+            }
+            else if (rb_ermaeßigt.Checked)
+            {
+                betrag = 25;
+            }
 
-        //    foreach (var line in lines)
-        //    {
-        //        int first = line.IndexOf(" ");
-
-        //        string datum = line.Substring(0, first);
-        //        string mitarbeiter = line.Substring(first);
-
-        //        Termin termin = new Termin(Convert.ToDateTime(datum), mitarbeiter);
-        //        termine.Add(termin);
-        //    }
-
-        //    dg_termine.DataSource = termine;
-        //}
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    string text = txtb_terminanfrage.Text;
-
-        //    DateTime datum = Convert.ToDateTime(text);
-
-        //    Termin termin = termine.Where(t => t.Datum == datum).First();
-        //    termine.Remove(termin);
-
-        //    // frei
-        //    if (termin.Mitarbeiter == "frei")
-        //    {
-        //        MessageBox.Show("frei, wird jetzt gebucht");
-        //        termin = new Termin(datum, "T");
-        //        termine.Add(termin);
-        //    }
-        //    //frei
-        //    else if(termin.Mitarbeiter == "T")
-        //    {
-        //        MessageBox.Show("nicht frei");
-        //    }
-        //}
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
+            for (int i = 0; i < nud_karten.Value; i++)
+            {
+                kaeufe.Add(karte.erstelle_Karte(kaufdatum, gueltig_bis, betrag));
+            }
+            txtb_karten.Text = string.Join(Environment.NewLine, kaeufe);
         }
     }
 }
