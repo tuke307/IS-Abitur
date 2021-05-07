@@ -1,0 +1,13 @@
+﻿0, 0, 0, 0, 0
+1, 01307, Dresden
+2, plz, ort
+3, 01307, Dresden
+4, plz, ort
+5, 01307, Dresden
+6, plz, ort
+7, 01307, Dresden
+8, plz, ort
+9, 01307, Dresden
+10, plz, ort
+11, 01307, Dresden
+12, plz, ort

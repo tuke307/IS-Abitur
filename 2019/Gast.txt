@@ -1,0 +1,7 @@
+﻿0, 0, 0
+1, Muster, Max, Stübelallee 12, 1
+2, Muster, Max, Stübelallee 12, 3
+3, Muster, Max, Stübelallee 12, 5
+4, Muster, Max, Stübelallee 12, 7
+5, Muster, Max, Stübelallee 12, 9
+6, Muster, Max, Stübelallee 12, 11
