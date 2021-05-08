@@ -2,7 +2,7 @@
 
 ## Framework
 Alle Projekte basieren auf dem [.NET 5.0 Framework](https://dotnet.microsoft.com/download/dotnet/5.0).
-Alle Projektieren wurden mit Windows Forms gebaut.
+Alle Projekte wurden mit Windows Forms gebaut.
 
 
 ## VS-Offline Hilfe
